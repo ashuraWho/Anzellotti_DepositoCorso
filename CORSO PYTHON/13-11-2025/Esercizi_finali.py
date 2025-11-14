@@ -47,6 +47,7 @@ while not opzione:
             while tipo not in ["int", "dec"]:
                 tipo = input("Per favore, scegli 'int' o 'dec': ").lower()
             
+            # decimali
             if tipo == "dec":
                 step = float(input("\nInserisci il passo (decimale positivo): "))
                 while step <= 0:
@@ -54,9 +55,11 @@ while not opzione:
                     
                 print(f"\nNumeri da 0 a {N} con passo {step}:")
                 current = 0.0
-                while current <= N:
+                while current <= N: # ciclo while per gestire lo step decimale
                     print(f"{current:.2f}") # Stampa con 2 decimali
                     current += step
+            
+            # interi
             else:
                 step = int(input("\nInserisci il passo (intero positivo): "))
                 while step <= 0:
