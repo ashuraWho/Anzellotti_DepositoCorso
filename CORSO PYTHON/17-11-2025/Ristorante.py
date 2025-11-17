@@ -65,8 +65,7 @@ for _ in range(numero_piatti):
 ristorante = Ristorante(nome_input, tipo_input, menu_input)
 
 # Modifica menu
-opzione = True
-while opzione:
+while True:
     print("\nScegli una delle opzioni: ")
     print("(1) Vedere la descrizione del ristorate")
     print("(2) Vedere il menu")
