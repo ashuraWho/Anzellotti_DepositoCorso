@@ -24,4 +24,3 @@ print(elemento) # Output: 2
 for riga in matrice:
     for elemento in riga:
         print(elemento) # Questa iterazione stamperebbe tutti gli elementi della matrice uno per uno.
-        
