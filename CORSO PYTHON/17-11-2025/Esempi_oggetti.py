@@ -48,6 +48,16 @@ class Persona:
 p = Persona("Luca", 25) # Creazione di un oggetto Persona
 p.saluta() # Output: Ciao, mi chiamo Luca 
 
+"""
+
+    Metodo di Istanza (senza decoratore):
+    
+    - Definito senza decoratori particolari.
+    - Riceve come primo parametro l'istanza (self).
+    - Opera sui dati specifici di quell'istanza.
+
+"""
+
 # -------
 
 # (2) Metodi di CLASSE: Operano sulla classe e non su un'istanza specifica.
@@ -72,6 +82,30 @@ c2 = Contatore() # Creazione di alcune istanze
 
 Contatore.mostra_numero_istanze() # Output: Sono state create 2 istanze.
 
+"""
+        
+    --- @classmethod Caratteristiche: ---
+
+    - Riceve un riferimento alla classe: Un metodo di classe
+    riceve come primo parametro la classe stessa (di convenzione cls).
+    Ciò consente di accedere e modificare attributi e metodi della classe.
+    
+    - Polimorfismo e ereditarietà: Permette di creare metodi
+    che funzionano in maniera diversa a seconda della classe in cui 
+    vengono invocati, rendendoli particolarmente utili nelle gerarchie di classi.
+    
+    - Chiamata: Può essere chiamato sia tramite la classe sia tramite un'istanza,
+    ma il primo parametro sarà sempre la classe.
+
+    --- Quando usarlo? ---
+
+    Utilizza un metodo di classe quando hai bisogno di:
+    (1) Accedere o modificare gli attributi di classe.
+    (2) Creare metodi che creano e restituiscono nuove istanze 
+    della classe che possono essere sovrascritti nelle classi derivate (ereditarietà).
+
+"""
+
 # -------
 
 # (3) Metodi STATICI: Funzioni legate alla classe ma che non operano né sull'istanza né sulla classe.
@@ -86,6 +120,34 @@ class Calcolatrice:
 
 risultato = Calcolatrice.somma(5, 3) # Uso del metodo statico senza creare un'istanza
 print(risultato) # Output: 8
+
+"""
+
+    --- @staticmethod   Caratteristiche: ---
+
+    - Nessun riferimento implicito: Un metodo statico
+    non riceve automaticamente un riferimento
+    all'istanza (self) né alla classe (cls).
+    
+    - Funzione indipendente: Può essere considerato
+    come una funzione ordinaria definita all'interno
+    della classe, utile per raggruppare logicamente
+    operazioni che riguardano la classe ma che non
+    necessitano di accedere a dati di istanza o di
+    classe.
+    
+    - Chiamata: Può essere chiamato sia tramite
+    l'istanza sia direttamente dalla classe.
+
+    --- Quando usarlo? ---
+
+    Utilizza un metodo statico quando la funzione non
+    ha bisogno di accedere o modificare lo stato della
+    classe o dell'istanza. È una scelta ideale per
+    funzioni di utilità che sono logicamente collegate
+    alla classe
+
+"""
 
 # ----------------------------------------------------------------------
 

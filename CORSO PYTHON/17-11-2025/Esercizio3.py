@@ -12,7 +12,7 @@ class Biblioteca:
 biblioteca = Biblioteca()
 
 while True:
-    titolo = input("\nTitolo (invio per terminare): ") 
+    titolo = input("\nTitolo (invio per terminare): ")
     if titolo == "":
         break
     autore = input("Autore: ")
