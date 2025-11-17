@@ -2,9 +2,9 @@
 # ------------------- ESERCITAZIONE FABBRICA -------------------
 # --------------------------------------------------------------
 
-# ====================================================================================
-# Come EXTRA ho aggiunto uno storico che tiene traccia dei movimenti nell'inventario
-# ====================================================================================
+# ===========================================================================================
+# Come EXTRA ho aggiunto uno storico (lista) che tiene traccia dei movimenti nell'inventario
+# ===========================================================================================
 
 class Prodotto: # Classe prodotto base
     def __init__(self, nome, costo_produzione, prezzo_vendita):
