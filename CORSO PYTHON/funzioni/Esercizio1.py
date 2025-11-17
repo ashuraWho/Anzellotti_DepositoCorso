@@ -1,0 +1,1 @@
+class Punto: # dichiaro la classe
