@@ -1,5 +1,5 @@
 # --------------------------------------------------------------
-# ------------------------ ESERCITAZIONE -----------------------
+# ------------------ ESERCITAZIONE RISTORANTE ------------------
 # --------------------------------------------------------------
 
 # Creo classe 'Ristorante':
@@ -47,7 +47,8 @@ class Ristorante:
         for piatto, prezzo in self.menu.items():
             print(f" - {piatto}: {prezzo:.2f}€")
             
-            
+# -----------------------------------------------------------------------------------
+
 # --- Raccolta di input dall’utente ---
 nome_input = input("\nNome del ristorante: ")
 tipo_input = input("Tipo di cucina offerta: ")
@@ -63,22 +64,68 @@ for _ in range(numero_piatti):
 # Creo l’istanza usando gli input
 ristorante = Ristorante(nome_input, tipo_input, menu_input)
 
-# Test di tutti i metodi
-ristorante.descrivi_ristorante()
-ristorante.stato_apertura()
-ristorante.apri_ristorante()
-ristorante.stato_apertura()
-ristorante.stampa_menu()
-
 # Modifica menu
-nuovo_piatto = input("\nAggiungi un nuovo piatto: ")
-nuovo_prezzo = float(input("Prezzo del nuovo piatto: "))
-ristorante.aggiungi_al_menu(nuovo_piatto, nuovo_prezzo)
-ristorante.stampa_menu()
+opzione = True
+while opzione:
+    print("\nScegli una delle opzioni: ")
+    print("(1) Vedere la descrizione del ristorate")
+    print("(2) Vedere il menu")
+    print("(3) Cambiare il menu")
+    print("(4) Vedere lo stato del ristorante (aperto/chiuso)")
+    print("(5) Aprire il ristorante")
+    print("(6) Chiudere il ristorante")
+    print("(7) Exit")
+    
+    comando = int(input("\nScegli una delle opzioni (1-6): "))
 
-piatto_da_togliere = input("\nQuale piatto vuoi togliere? ")
-ristorante.togli_dal_menu(piatto_da_togliere)
-ristorante.stampa_menu()
+    match comando:
+        
+        case 1:
+            ristorante.descrivi_ristorante()
+        
+        case 2:
+            ristorante.stampa_menu()
+            
+        case 3:
+            scelta = True
+            
+            while scelta:
 
-ristorante.chiudi_ristorante()
-ristorante.stato_apertura()
+                modifica = input("\nVuoi aggiungere, eliminare un piatto o uscire? (add/del) ")
+                if modifica == "add":
+                    nuovo_piatto = input("\nAggiungi un nuovo piatto: ")
+                    nuovo_prezzo = float(input("Prezzo del nuovo piatto: "))
+                    ristorante.aggiungi_al_menu(nuovo_piatto, nuovo_prezzo)
+                    ristorante.stampa_menu()
+                elif modifica == "del":
+                    piatto_da_togliere = input("\nQuale piatto vuoi togliere? ")
+                    ristorante.togli_dal_menu(piatto_da_togliere)
+                    ristorante.stampa_menu()
+                else:
+                    print("\nInserire 'add' o 'del'.")
+                
+                ripetere = input("\nVuoi cambiare altro? (s/n) ")
+                if modifica == "s":
+                    continue
+                elif modifica == "n":
+                    scelta = False
+                else:
+                    print("\nInserire 's' o 'n'.")
+                          
+        case 4:
+            ristorante.stato_apertura()
+            
+        case 5:
+            ristorante.apri_ristorante()
+            
+        case 6:
+            ristorante.chiudi_ristorante()
+            
+        case 7:
+            print("\nUscita.")
+            break
+            
+        case _:
+            print("\nComando non riconosciuto.")
+            print("Per favore, inserisci 's' o 'n'.")
+       
