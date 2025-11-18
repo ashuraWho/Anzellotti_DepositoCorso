@@ -31,7 +31,7 @@
 
 # ----------------------------------------------------------------------
 
-# ----- I 3 TIPI DI METODI: -----
+# ----- I 3 TIPI DI METODI (il 4 sono gli speciali): -----
 
 # I metodi sono funzioni definite all'interno di una classe che operano sugli oggetti (le istanze) della classe stessa.
 
