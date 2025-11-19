@@ -2,7 +2,7 @@
 # --------------------------- OGGETTI --------------------------
 # --------------------------------------------------------------
 
-# Una CLASSE è un blue print (un modello progettuale)
+# Una CLASSE è un modello progettuale
 # (1) Le classi sono definite usando la parola chiave class, seguita dal nome della classe
 # (2) Definisce le variabili (attributi) e i comportamenti (metodi) che può fare un singolo oggetto
 
