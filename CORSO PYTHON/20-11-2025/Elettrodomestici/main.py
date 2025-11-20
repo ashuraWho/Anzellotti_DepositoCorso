@@ -1,8 +1,3 @@
-from elettrodomestico import Elettrodomestico
-from lavatrice import Lavatrice
-from frigorifero import Frigorifero
-from forno import Forno
-from riparazione import TicketRiparazione
 from officina import Officina
 import inserimento
 
