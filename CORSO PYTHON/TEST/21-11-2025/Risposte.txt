@@ -1,0 +1,111 @@
+3. Cos'è Python? quali sono le sue caratteristiche, spiegale:
+
+Python è un linguaggio di programmazione:
+- interpretato: c’è un interprete tra ciò che scrivi e l’eseguibile.
+- orientato agli oggetti (linguaggio OOP): segue i 4 pilastri dei linguaggi OOP, ovvero:
+    1. ereditarietà;
+    2. incapsulamento;
+    3. polimorfismo;
+    4. astrazione: è la regola madre.
+- dinamico: ha una tipizzazione fortemente dinamica, cioè le variabili possono cambiare
+il proprio tipo senza esplicitarne il cambiamento, ma devono sempre avere un tipo.
+- ad alto livello di astrazione: è lontano dal linguaggio macchina e vicino a quello umano (inglese).
+Inoltre Python si distingue per l’indentazione per chiudere il blocco di codice, ovvero la distanza dal margine sinistro (detto punto zero).
+
+------------------------------
+
+5. Cos'è una collezione? quali abbiamo studiato in Python? Spiega le differenze e fai un esempio di codice di istanziazione
+
+
+------------------------------
+
+7. Cos'è una classe cos'è un oggetto, cosa possono contenere ?
+
+Una classe è un modello progettuale definito come " class <nome della classe> " (es. "class Veicoli"), che definisce le variabili (attributi) e
+i comportamenti (metodi) che può fare un singolo oggetto.
+Un oggetto è una copia univoca della classe con proprietà uniche che può solo fare quanto definito dalla classe (istanza di una classe).
+Una classe al suo interno può avere:
+- infiniti oggetti;
+- altre classi;
+- attributi;
+- metodi (4 tipi: di istanza, di classe, statici, speciali).
+
+------------------------------
+
+9. Spiega le tre regole fondamentali, cosa fanno, e fai un ESEMPIO DI CODICE per ognuna
+
+Le tre regole fondamentali dell'OOP sono l'ereditarietà, l'incapsulamento e il polimorfismo.
+
+EREDITARIETA'
+L'ereditarietà consente di creare nuove classi a partire da classi esistenti, ereditandone attributi e metodi. La nuova classe è detta sottoclasse
+(o classe figlio), mentre la classe esistente è detta superclasse (o classe padre): una sottoclasse può avere infiniti padri (ereditarietà multipla).
+La funzione "super()" serve per chiamare il costruttore della superclasse, in questo modo la classe figlio può modificare il
+comportamento del padre. Se la sottoclasse sovrascrivere i metodi del padre si parla di "sovrascrittura dei metodi".
+
+ESEMPIO EREDITARIETA' (SINGOLA):
+
+class Animale: # Classe base
+    def __init__(self, nome):
+        self.nome = nome
+    
+    def parla(self):
+        print(f"{self.nome} fa suono generico.")
+        
+class Cane(Animale): # Classe derivata (eredita da Animale)
+    def parla(self):
+        print(f"{self.nome} abbaia!")
+    
+animale_generico = Animale("AnimaleGenerico")
+cane = Cane("Fido")
+
+animale_generico.parla() # Output: AnimaleGenerico fa suono generico.
+cane.parla() # Output: Fido abbaia!
+
+-----------
+
+INCAPSULAMENTO
+Come se avessimo una scatola chiusa, con l'incapsulamento vengono nascosti i dettagli interni di una classe e facendo vedere solo ciò che è necessario.
+Qui abbiamo:
+- attributi protetti (_attributo): è una convenzione che indica che l'attributo dovrebbe essere usato solo nella classe e nelle sue sottoclassi.
+- attributi privati (__attributo): in questo modo l'attributo non può essere accesso direttamente dall'esterno della classe (si può solo usando i metodi "getter" e "setter").
+
+ESEMPIO INCAPSULAMENTO
+class Computer:
+    def __init__(self):
+        self.__processore = "Intel i5" # Attributo privato
+        
+    def get_processore(self):
+        return self.__processore
+    
+    def set_processore(self, processore):
+        self.__processore = processore
+        
+pc = Computer()
+print(pc.get_processore())
+# Accede all'attributo privato tramite il getter
+pc.set_processore("AMD Ryzen 5")
+# Modifica l'attributo privato tramite il setter
+print(pc.get_processore())
+
+-----------
+
+POLIMORFISMO 
+In Python viene utilizzato con la sovrascrittura dei metodi (overriding). L'overriding si ha se una sottoclasse
+implementa un metodo specifico che è già definito nella sua classe padre.
+
+ESEMPIO POLIMORFISMO
+class Animale: # Classe padre
+    def emetti_suono(self):
+        print("Questo animale fa un suono")
+
+class Cane(Animale): # Classe figlio
+    def emetti_suono(self): # Sovrascrivo il metodo emetti_suono()
+        print("Bau")
+
+
+------------------------------
+
+11. Cos'è git e cos'è github? Cosa puoi fare con github? (azioni e concetti)
+
+Git è un sistema che permette di tenere traccia delle modifiche ai file (in questo modo si può tornare all versioni precedenti).
+GitHub è una piattaforma che implementa Git, la cosa fondamentale è che tiene traccia della cronostoria.
