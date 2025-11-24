@@ -22,4 +22,4 @@ print("Ogni terzo elemento: ", ogni_tre)
 
 # Modifico gli elementi dall'indice 5 all'indice 10 (escluso)
 arr[5:10] = 42
-print("Array modificato: ", arr)
+print("Array modificato: ", arr) # -> Lo slicing modifica direttamente l’array originale
