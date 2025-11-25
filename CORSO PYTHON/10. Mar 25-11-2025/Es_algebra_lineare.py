@@ -45,7 +45,7 @@ print("Soluzione X:", x) # Output: [2. 3.]
 import numpy as np
 
 # Creazione di un segnale
-t = np. Linspace(0, 1, 400)
+t = np.linspace(0, 1, 400)
 sig = np.sin(2 * np.pi * 50 * t) + np.sin(2 * np.pi * 120 * t)
 
 # Calcolo della Trasformata di Fourier
