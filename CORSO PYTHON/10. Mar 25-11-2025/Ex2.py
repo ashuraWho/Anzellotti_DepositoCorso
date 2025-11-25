@@ -11,17 +11,25 @@ def salva_su_file(nome_file, contenuto, sovrascrivi):
     with open(nome_file, mode) as f:
         f.write(contenuto)
 
-
 def esecuzione():
 
-    arr_lin = np.linspace(0, 10, 50) # Creo array con linspace
+    print("\n--- Imposta parametri ---")
 
-    arr_rand = np.random.random(50) # Creo array con random
+    n = int(input("Quanti numeri generare? (lunghezza array per linspace e random): "))
+    
+    lin_start = float(input("Linspace start: "))
+    lin_end = float(input("Linspace end: "))
+    
+    rand_min = float(input("Random minimo: "))
+    rand_max = float(input("Random massimo: "))
+
+    # Generazione array
+    arr_lin = np.linspace(lin_start, lin_end, n) # Creo array con linspace
+    arr_rand = np.random.random(n) * (rand_max - rand_min) + rand_min # Creo array con random
 
     arr_sum = arr_lin + arr_rand # Sommo gli elementi
 
     somma_totale = np.sum(arr_sum) # Sommo i due array
-
     somma_maggiori_5 = np.sum(arr_sum[arr_sum > 5]) # Sommo elementi > 5
 
     # Stampa su schermo
