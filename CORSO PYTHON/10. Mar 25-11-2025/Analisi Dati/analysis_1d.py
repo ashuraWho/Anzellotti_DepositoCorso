@@ -55,7 +55,11 @@ class Analysis1D: # Analisi statistiche su array 1D
         results = { # Dizionario
             'basic_statistics': self.basic_statistics(),
             'positional_analysis': self.positional_analysis(),
-            'research_analysis': self.search_analysis()
+            'search_analysis': self.search_analysis()
         }
         
         return results
+    
+    
+    def is_1d_data(self): # Verifica se i dati originali erano 1D
+        return self.original_data.ndim == 1 # True se i dati originali erano 1D

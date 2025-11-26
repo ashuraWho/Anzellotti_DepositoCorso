@@ -1,0 +1,85 @@
+# --- DATA ANALYSIS SYSTEM ---
+
+Aside from the comments, the entire program and README are written in English.
+This is to accommodate people from other countries who use the system.
+
+## Overview
+
+This project is an interactive data analysis system written entirely in Python.
+It allows you to:
+- load TXT/CSV files containing 1D or 2D numerical data
+- perform 1D analysis (basic statistics, positional stats...)
+- perform 2D analysis (row/column statistics, matrix operations...)
+- run a full analysis (1D + 2D)
+- save analysis results to a text file (TXT/CSV)
+- display information about the loaded data
+
+## Main Features
+
+### (1) File Loading
+
+- Supports TXT and CSV
+- Automatic shape detection
+- Converts all inputs into a np.ndarray
+
+### (2) 1D Analysis
+
+Includes:
+- minimum and maximum
+- mean and std (standard deviation)
+- median
+- index of minimum and maximum values
+
+### (3) 2D Analysis
+
+Includes:
+- row and column statistics (min, max, mean, sum)
+- matrix operations:
+	- determinant (square matrices)
+	- covariance matrix
+	- matrix–matrix product (when valid)
+	- automatic shape validation
+
+### (4) Full Analysis
+
+Runs 1D + 2D analysis automatically (if applicable).
+
+### (5) Result Saving
+
+Results are saved in a TXT/CSV file.
+
+### (6) Interactive Menu
+
+(1) Upload file (TXT/CSV)
+(2) Full analysis (1D + 2D)
+(3) 1D analysis only
+(4) 2D analysis only
+(5) Save results
+(6) Data information
+(0) Exit
+
+## How to Run the Program
+
+- Make sure you have Python 3.10+ installed.
+- Make sure you have NumPy installed -> Install NumPy: pip install numpy
+- Clone the repository: https://github.com/ashuraWho/Anzellotti_DepositoCorso/tree/main/CORSO%20PYTHON/10.%20Mar%2025-11-2025/Analisi%20Dati
+- Run the program: python3 main.py
+
+## Supported File Formats
+
+- 1D example -> single row or column:
+    1.2 3.4 5.6 7.8
+
+- 2D example -> matrix:
+    1, 2, 3
+    4, 5, 6
+    7, 8, 9
+
+Supported separators:
+- spaces
+- commas
+
+## Notes
+
+- If 2D analysis is not possible (1D data), the program shows a warning but still performs the 1D analysis.
+- If no TXT/CSV files are found in the current directory then the program creates them randomly: 'example.csv' and 'example.txt'.

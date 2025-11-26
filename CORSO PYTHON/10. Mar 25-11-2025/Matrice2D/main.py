@@ -18,51 +18,53 @@ def main():
 
         scelta = input("\nScelta: ")
 
-        if scelta == "1":
-            matrice = m2D.crea_matrice(nome_file)
+        match scelta:
+            
+            case "1":
+                matrice = m2D.crea_matrice(nome_file)
 
-        elif scelta == "2":
-            if matrice is not None:
-                matrice = m2D.sotto_matrice_centrale(matrice, nome_file)
-            else:
-                print("\nCrea prima una matrice!")
+            case "2":
+                if matrice is not None:
+                    matrice = m2D.sotto_matrice_centrale(matrice, nome_file)
+                else:
+                    print("\nCrea prima una matrice!")
 
-        elif scelta == "3":
-            if matrice is not None:
-                matrice = m2D.trasposta(matrice, nome_file)
-            else:
-                print("\nCrea prima una matrice!")
+            case "3":
+                if matrice is not None:
+                    matrice = m2D.trasposta(matrice, nome_file)
+                else:
+                    print("\nCrea prima una matrice!")
 
-        elif scelta == "4":
-            if matrice is not None:
-                m2D.somma(matrice, nome_file)
-            else:
-                print("\nCrea prima una matrice!")
+            case "4":
+                if matrice is not None:
+                    m2D.somma(matrice, nome_file)
+                else:
+                    print("\nCrea prima una matrice!")
 
-        elif scelta == "5":
-            if matrice is not None:
-                m2D.elementwise(matrice, nome_file)
-            else:
-                print("\nCrea prima una matrice!")
+            case "5":
+                if matrice is not None:
+                    m2D.elementwise(matrice, nome_file)
+                else:
+                    print("\nCrea prima una matrice!")
 
-        elif scelta == "6":
-            if matrice is not None:
-                m2D.media(matrice, nome_file)
-            else:
-                print("\nCrea prima una matrice!")
+            case "6":
+                if matrice is not None:
+                    m2D.media(matrice, nome_file)
+                else:
+                    print("\nCrea prima una matrice!")
 
-        elif scelta == "7":
-            if matrice is not None:
-                m2D.determinante(matrice, nome_file)
-            else:
-                print("\nCrea prima una matrice!")
-                
-        elif scelta == "0":
-            print("\nUscita")
-            break
+            case "7":
+                if matrice is not None:
+                    m2D.determinante(matrice, nome_file)
+                else:
+                    print("\nCrea prima una matrice!")
+                    
+            case "0":
+                print("\nUscita")
+                break
 
-        else:
-            print("\nScelta non valida.")
+            case _:
+                print("\nScelta non valida.")
 
 
 if __name__ == "__main__":
