@@ -1,12 +1,13 @@
 import numpy as np
 import pandas as pd
 import os
-from sklearn.model_selection import train_test_split # Per dividere i dati in train e test
 from sklearn.preprocessing import MinMaxScaler # Per normalizzare i dati
-from sklearn.linear_model import LogisticRegression # Modello di regressione logistica
-from sklearn.metrics import accuracy_score, roc_auc_score # Metriche di valutazione
 
-filename = input("Inserisci il nome del file CSV da caricare: ")
+"""
+    Il file CSV che importo lo ha generato l'AI.
+"""
+
+filename = input("\nInserisci il nome del file CSV da caricare: ")
 path = "CORSO PYTHON/12. Gio 27-11-2025/Analisi Clienti Telecomunicazioni/"
 filepath = os.path.join(path, filename)
 
@@ -20,8 +21,7 @@ filepath = os.path.join(path, filename)
         • Servizio_Clienti_Contatti: Quante volte il cliente ha contattato il servizio clienti
         • Churn: Se il cliente ha lasciato la compagnia
 """
-
-# ------------------------------------------------------
+print("\n------------------------------------------------------")
 
 # --- CARICO DATI ---
 
@@ -39,7 +39,11 @@ print(df.describe())
 print("\n--- CHURN ---")
 print(df["Churn"].value_counts())
 
-# ------------------------------------------------------
+# Stampo anteprima
+print("\n--- PRIME 5 RIGHE ---")
+print(df.head())
+
+print("\n------------------------------------------------------")
 
 # --- PULIZIA DATI ---
 
@@ -47,24 +51,57 @@ print(df["Churn"].value_counts())
 df = df.dropna(how="all")
 
 # Valori numerici mancanti -> media della colonna
-for col in df.select_dtypes(include=[np.number]).columns:
+for col in df.select_dtypes(include=[np.number]).columns: # Scorro solo le colonne numeriche
     df[col] = df[col].fillna(df[col].mean())
 
-# Valori Churn mancanti -> "No"
-df["Churn"] = df["Churn"].fillna("No")
+# Pulisco il Churn
+def pulisci_churn(val):
+    if val is None:
+        return "No" # Valori mancanti
+    
+    v = str(val).strip().lower() # Tolgo spazi e metto minuscolo
+    
+    # Valori validi
+    if v in ["si", "sì", "sì'", "sı", "yes", "y"]:
+        return "Si"
+    
+    if v in ["no", "0", "n", "nope"]:
+        return "No" 
+    
+    # Tutto ciò che è sporco -> assumo "No"
+    return "No"
+
+# Pulisco
+df["Churn"] = df["Churn"].apply(pulisci_churn)
 
 # Valori anomali:
-df["Età"] = df["Età"].apply(lambda x: np.nan if x < 0 else x) # Età negativa -> nan
+df["Età"] = df["Età"].apply(lambda x: np.nan if x < 16 or x > 100 else x) # -> nan (uso la lambda function)
 df["Età"] = df["Età"].fillna(df["Età"].median())  #  nan -> mediana
 
-# Tolgo valori tariffa anomali (es. < 0)
-df["Tariffa_Mensile"] = df["Tariffa_Mensile"].clip(lower=0)
+# Tolgo valori tariffa anomali
+df["Tariffa_Mensile"] = df["Tariffa_Mensile"].clip(lower=0) # Porto a 0 i valori negativi
 
-# ------------------------------------------------------
+# Info DF
+print("\n--- INFO DATASET PULITO ---")
+print(df.info())
+
+# Descrizione statistica per colonne numeriche
+print("\n--- DESCRIZIONE STATISTICA PULITA ---")
+print(df.describe())
+
+# Conteggi Churn -> se il cliente ha lasciato la compagnia
+print("\n--- CHURN PULITO ---")
+print(df["Churn"].value_counts())
+
+# Stampo anteprima
+print("\n--- PRIME 5 RIGHE PULITE ---")
+print(df.head())
+
+print("\n------------------------------------------------------")
 
 # --- ANALISI ESPLORATIVA DATI (EDA) ---
 
-# Nuova colonna costo per GB -> no diviso 0
+# Nuova colonna costo per GB -> se ho nan da diviso 0 metto 0
 df["Costo_per_GB"] = df["Tariffa_Mensile"] / df["Dati_Consumati"].replace(0, np.nan)
 df["Costo_per_GB"] = df["Costo_per_GB"].fillna(0)
 
@@ -74,61 +111,31 @@ print(df.groupby("Churn")[["Età", "Durata_Abonnamento", "Tariffa_Mensile"]].mea
 
 # Studio correlazione
 print("\n--- CORRELAZIONI ---")
-print(df.corr(numeric_only=True))
+print(df.corr(numeric_only=True)) # Calcolo correlazioni tra colonne numeriche
 
-# ------------------------------------------------------
+# Conversione Churn
+df["Churn_Num"] = df["Churn"].map({"No": 0, "Si": 1}) # 0 = No, 1 = Si
+
+# Calcolo la matrice completa
+matrice_correlazione = df.corr(numeric_only=True) 
+# Stampo le correlazioni con la variabile target 'Churn_Num'
+print("\n--- CORRELAZIONE CON CHURN ---")
+print(matrice_correlazione["Churn_Num"].sort_values(ascending=False))
+
+print("\n------------------------------------------------------")
 
 # --- PREPARAZIONE MODELLAZIONE ---
 
-# Conversione Churn
-df["Churn_Num"] = df["Churn"].map({"No": 0, "Si": 1, "Sì": 1}) # La gente può scrivere "Si" o "Sì"
-
-# Valori non mappati? Metto a 0
-df["Churn_Num"] = df["Churn_Num"].fillna(0)
-
-# Seleziono le colonne numeriche per normalizzazione
+# Lista colonne numeriche da normalizzare
 colonne_numeriche = ["Età", "Durata_Abonnamento", "Tariffa_Mensile", "Dati_Consumati", "Servizio_Clienti_Contatti", "Costo_per_GB"]
 
-# Inizializzo lo scaler MinMax
-scaler = MinMaxScaler()
+scaler = MinMaxScaler() # Normalizzo -> porto i valori tra 0 e 1
 
 # Normalizzo le colonne
-df[colonne_numeriche] = scaler.fit_transform(df[colonne_numeriche])
+df[colonne_numeriche] = scaler.fit_transform(df[colonne_numeriche]) # scaler -> calcola min/max e trasforma i valori
 
-# ------------------------------------------------------
+# Stampo anteprima
+print("\n--- PRIME 5 RIGHE NORMALIZZATE ---")
+print(df.head())
 
-# --- MODELLAZIONE PREDITTIVA ---
-
-# Variabili indipendenti (X) = tutte le colonne numeriche normalizzate
-X = df[colonne_numeriche]
-
-# Variabile dipendente (y) = churn numerico
-y = df["Churn_Num"]
-
-# Dividiamo in train e test
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.3, random_state=42
-)
-
-# Inizializziamo la regressione logistica
-model = LogisticRegression()
-
-# Alleniamo il modello
-model.fit(X_train, y_train)
-
-# Predizioni sul test
-y_pred = model.predict(X_test)
-
-# Predizioni probabilistiche (necessarie per AUC)
-y_prob = model.predict_proba(X_test)[:, 1]
-
-# Calcoliamo l'accuratezza
-accuracy = accuracy_score(y_test, y_pred)
-
-# Calcoliamo l'AUC
-auc = roc_auc_score(y_test, y_prob)
-
-# Stampiamo i risultati
-print("\n=== RISULTATI MODELLO ===")
-print("Accuratezza:", accuracy)
-print("AUC:", auc)
+print("\n------------------------------------------------------")
