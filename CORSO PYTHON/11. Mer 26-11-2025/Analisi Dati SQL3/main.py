@@ -263,7 +263,7 @@ def main():
                     if ok:
                         print(f"\nDataset saved to {dbpath} table {table}")
                     
-            case "9": # Salvo i risultati dell'analisi nel DB2
+            case "9": # Salvo i risultati dell'analisi nel DB2 -> non mi torna la stampa del DB2 (devo vederla)
                 
                 if system.current_results is None:
                     print("\nNo analysis results present. Run analysis first.")
