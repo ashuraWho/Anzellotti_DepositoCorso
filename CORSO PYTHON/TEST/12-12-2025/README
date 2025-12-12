@@ -1,0 +1,45 @@
+# Ocean Health Index – Analisi e Machine Learning
+
+## Descrizione
+Questo progetto analizza il dataset 'Ocean_Health_Index.csv', che contiene l’indice della salute degli oceani per numerosi paesi dal 2012 al 2024.
+
+Include:
+- Pulizia e preparazione dei dati
+- Analisi esplorativa (EDA)
+- Visualizzazioni
+- Modelli di machine learning:
+    - Regressione Lineare (supervisionato)
+    - K-Means (non supervisionato)
+
+## Pulizia dei Dati
+- Verifica dei valori nulli
+- Verifica dei min e max
+- Sistemazione colonne
+- Sistemazione righe
+
+## Analisi Esplorativa -> primi grafici
+- Trend globale OHI medio
+- Confronto top 5 paesi
+- Heatmap annuale
+
+## Analisi pre/durate/post COVID-19
+- Media globale
+- Confronto OHI medio
+- Trend OHI globale
+- Confronto per paesi
+
+## Machine Learning
+
+### Modello supervisionato –> Regressione Lineare
+- Predice il valore OHI in funzione dell’anno -> predetto anni dal 2025 a 2030
+- Metriche:
+    - MSE
+    - R2
+
+### Modello non supervisionato -> K-Means
+- Clusterizza i paesi in base alla loro serie temporale di OHI
+
+### XGBoost
+- MSE
+- R2
+- Predetto anni dal 2025 a 2030
